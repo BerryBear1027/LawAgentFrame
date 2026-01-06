@@ -1,0 +1,31 @@
+# 1. 核心：绝对不能上传虚拟环境
+# 组员应该自己根据 requirements.txt 创建环境，而不是用你的
+.venv/
+venv/
+env/
+
+# 2. 核心：绝对不能上传密钥和本地配置
+# 组员应该有自己的 .env 文件，而不是用你的
+.env
+.DS_Store
+
+# 3. Python 编译垃圾 (会自动生成，不需要上传)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 4. PyCharm/VSCode 个人配置 (避免和组员的编辑器设置冲突)
+.idea/
+.vscode/
+*.swp
+
+# 5. 数据文件 (看情况)
+# 通常不上传巨大的临时数据或隐私合同
+# 但保留 benchmark 测试集给组员用
+data/raw/
+data/processed/
+!data/benchmark/  # 感叹号表示“不忽略”，即保留这个文件夹
+
+# 6. 向量数据库本地缓存
+chroma_db/
