@@ -40,17 +40,77 @@
 4. 完善 `risk_engine.py`：实现检索-提示拼接-调用 LLM 的完整 RAG 流程及结果解析、结构化输出。
 5. 测试与 CI：补充单元/集成测试，确保接口契约与实现一致。
 
-如何贡献 / 本地运行（快速提示）
-
-- 查看 Python 依赖：`requirements.txt`。
-- 在本地开发时，先创建虚拟环境并安装依赖；请在 `.env` 中按需填入 `OPENAI_API_KEY`（仅在准备好使用真实 API 时）。
-
-示例命令（在项目根目录下）
-
-```powershell
-python -m venv .venv
-.\\.venv\\Scripts\\Activate.ps1
-pip install -r requirements.txt
+#### 第一步：下载代码
+在终端（Terminal）或 Git Bash 中运行：
+```bash
+git clone https://github.com/BerryBear1027/LawAgentFrame.git
+cd LawAgentFrame
 ```
 
-注意：即使填入 `OPENAI_API_KEY`，也需要将 `src/services/openai_service.py` 中的 Mock 替换为真实调用代码，且在使用过程中注意成本与速率限制。
+#### 第二步：创建并激活虚拟环境
+
+**Windows 用户 (PowerShell):**
+
+```powershell
+# 1. 创建环境
+python -m venv .venv
+
+# 2. 激活环境 (注意斜杠)
+.\.venv\Scripts\Activate.ps1
+```
+
+*如果不成功，试一下 `.\.venv\Scripts\activate*`
+*激活成功标志：命令行前面会出现绿色的 `(.venv)*`
+
+**Mac / Linux 用户:**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+#### 第三步：安装依赖库
+
+确保终端前有 `(.venv)` 标志，然后运行以下命令（使用清华源加速，防止报错）：
+
+```bash
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+#### 第四步：配置环境变量
+
+由于安全原因，`.env` 文件没有上传。你需要手动创建一个。
+
+1. 在项目根目录下新建一个文件，命名为 `.env` (注意前面有点)。
+2. 在里面写入以下内容（目前先用 Mock Key）：
+```ini
+OPENAI_API_KEY=sk-mock-key-for-testing
+```
+#### 第五步：启动服务
+在终端运行：
+```bash
+uvicorn src.api.main:app --reload
+```
+
+如果看到以下提示，说明启动成功：
+
+> INFO: Uvicorn running on [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+#### 第六步：验证是否成功
+终端运行测试脚本：
+
+```bash
+python test_api_script.py
+```
+
+---
+
+如果也用 PyCharm，可能会遇到“解释器为空”的情况。请告诉他们：
+
+1. 打开 PyCharm -> **Settings** -> **Python Interpreter**。
+2. 点击 **Add Interpreter** -> **Local**。
+3. 选择 **Existing**。
+4. 路径指向项目文件夹下的 `.venv/Scripts/python.exe` (Windows) 或 `.venv/bin/python` (Mac)。
+5. **一定要把 `src` 文件夹标记为源码根目录**：右键 `src` 文件夹 -> **Mark Directory as** -> **Sources Root**。
+
+---
