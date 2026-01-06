@@ -105,7 +105,7 @@ python test_api_script.py
 
 ---
 
-如果也用 PyCharm，可能会遇到“解释器为空”的情况。请告诉他们：
+如果也用 PyCharm，可能会遇到“解释器为空”的情况：
 
 1. 打开 PyCharm -> **Settings** -> **Python Interpreter**。
 2. 点击 **Add Interpreter** -> **Local**。
